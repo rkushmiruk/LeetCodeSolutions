@@ -1,5 +1,7 @@
 package com.kushmyruk;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 
 //Given an array of integers, return indices of the two numbers such that they add up to a specific target.
@@ -10,15 +12,32 @@ import java.util.stream.Stream;
 //    return [0, 1].
 public class TwoSum {
 
+    //First Solution (Space = O(1), Time = O(n^2))
+
+//    public int[] twoSum(int[] nums, int target) {
+//        for (int i = 0; i < nums.length; i++) {
+//            for (int j = 0; j < i; j++) {
+//                if (nums[i] + nums[j] == target) {
+//                    return new int[] { j, i };
+//                }
+//            }
+//        }
+//        throw new IllegalArgumentException("No two sum solution");
+//    }
+
+    //Second Solution (Space = O(n), Time = O(n))
+
     public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+
         for (int i = 0; i < nums.length; i++) {
-            for (int j = 0; j < i; j++) {
-                if (nums[i] + nums[j] == target) {
-                    return new int[] { j, i };
-                }
+            int complement = target - nums[i];
+            if (map.containsKey(complement)) {
+                return new int[] { map.get(complement), i };
             }
+            map.put(nums[i], i);
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("No two sum solution");
     }
 
 }
